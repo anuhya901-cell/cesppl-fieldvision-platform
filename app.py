@@ -787,18 +787,22 @@ def show_dashboard_page():
 
         colors = plt.cm.Set3.colors
 
-        # Check if there is any data to plot
-        if chart_dataframe["Upload count"].sum() > 0:
+        # Keep only classes that have at least one upload
+        pie_dataframe = chart_dataframe[
+            chart_dataframe["Upload count"] > 0
+        ].copy()
+
+        if not pie_dataframe.empty:
 
             wedges, texts, autotexts = axis_pie.pie(
-                chart_dataframe["Upload count"],
-                labels=chart_dataframe["Activity class"],
-                colors=colors,
+                pie_dataframe["Upload count"],
+                labels=pie_dataframe["Activity class"],
+                colors=colors[:len(pie_dataframe)],
                 startangle=90,
                 autopct="%1.1f%%",
                 pctdistance=0.78,
-                labeldistance=1.10,
-                radius=1.05,
+                labeldistance=1.12,
+                radius=0.92,
                 wedgeprops={
                     "width": 0.42,
                     "edgecolor": "white",
@@ -809,12 +813,10 @@ def show_dashboard_page():
                 },
             )
 
-            # Class names
             for text in texts:
                 text.set_fontsize(9)
                 text.set_fontweight("normal")
 
-            # Percentage values
             for autotext in autotexts:
                 autotext.set_fontsize(9)
                 autotext.set_fontweight("bold")
