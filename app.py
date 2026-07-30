@@ -787,35 +787,51 @@ def show_dashboard_page():
 
         colors = plt.cm.Set3.colors
 
-        wedges, texts, autotexts = axis_pie.pie(
-            chart_dataframe["Upload count"],
-            labels=chart_dataframe["Activity class"],
-            colors=colors,
-            startangle=90,
-            autopct="%1.1f%%",
-            pctdistance=0.78,
-            labeldistance=1.10,
-            radius=1.05,
-            wedgeprops={
-                "width": 0.42,
-                "edgecolor": "white",
-                "linewidth": 2,
-            },
-            textprops={
-                "fontsize": 9,
-            },
-        )
+        # Check if there is any data to plot
+        if chart_dataframe["Upload count"].sum() > 0:
 
-        # Class names
-        for text in texts:
-            text.set_fontsize(9)
-            text.set_fontweight("normal")
+            wedges, texts, autotexts = axis_pie.pie(
+                chart_dataframe["Upload count"],
+                labels=chart_dataframe["Activity class"],
+                colors=colors,
+                startangle=90,
+                autopct="%1.1f%%",
+                pctdistance=0.78,
+                labeldistance=1.10,
+                radius=1.05,
+                wedgeprops={
+                    "width": 0.42,
+                    "edgecolor": "white",
+                    "linewidth": 2,
+                },
+                textprops={
+                    "fontsize": 9,
+                },
+            )
 
-        # Percentage values
-        for autotext in autotexts:
-            autotext.set_fontsize(9)
-            autotext.set_fontweight("bold")
-            autotext.set_color("black")
+            # Class names
+            for text in texts:
+                text.set_fontsize(9)
+                text.set_fontweight("normal")
+
+            # Percentage values
+            for autotext in autotexts:
+                autotext.set_fontsize(9)
+                autotext.set_fontweight("bold")
+                autotext.set_color("black")
+
+        else:
+            axis_pie.text(
+                0.5,
+                0.5,
+                "No uploads available",
+                ha="center",
+                va="center",
+                fontsize=14,
+                fontweight="bold",
+                color="gray",
+            )
+            axis_pie.axis("off")
 
         axis_pie.set_title(
             "Prediction Distribution",
