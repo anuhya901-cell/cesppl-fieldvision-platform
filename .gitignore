@@ -1,4 +1,4 @@
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
 *.pyo
@@ -9,22 +9,30 @@ __pycache__/
 venv/
 env/
 
-# Testing cache
-.pytest_cache/
-
 # VS Code
 .vscode/
 
-# Streamlit secrets
+# Pytest
+.pytest_cache/
+
+# Streamlit cache
 .streamlit/secrets.toml
 
-# SQLite runtime files
+# SQLite databases
+data/cesppl_dashboard.db
+data/cesppl_dashboard_backup.db
+data/cesppl_dashboard_roundtrip.db
+data/cesppl_pipeline_validation.db
 *.db
 *.db-journal
 *.db-wal
 *.db-shm
 
-# Logs and temporary files
+# Logs
 *.log
+
+# OS files
 .DS_Store
 Thumbs.db
+# Independent FieldVision repository
+cesppl-fieldvision-platform/

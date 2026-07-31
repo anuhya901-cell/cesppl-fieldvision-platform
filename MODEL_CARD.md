@@ -110,6 +110,10 @@ The dataset is imbalanced. Some activities, especially MANUAL BEACH CLEANING, ha
 | ROAD SWEEPING | 0.9231 | 0.9231 | 0.9231 | 78 |
 | SECONDARY VEHICLES | 0.9487 | 0.8409 | 0.8916 | 44 |
 
+## Confusion Matrix
+
+![Confusion Matrix](assets/confusion-matrix.png)
+
 ## CPU Inference Performance
 
 - **Device:** User's Windows laptop CPU
@@ -119,7 +123,6 @@ The dataset is imbalanced. Some activities, especially MANUAL BEACH CLEANING, ha
 - **Warm-up inference:** Performed before timing
 - **Approximate throughput:** **4.85 images/second**  
 
-This number should be replaced with the value printed by `predict.py`.
 
 ## Ethical Considerations
 
@@ -134,6 +137,13 @@ The following safeguards are recommended:
 - Apply appropriate retention and access-control policies.
 - Provide human review for low-confidence or disputed predictions.
 - Avoid publishing raw field photographs without appropriate permission.
+
+## Strengths
+
+- Achieved 95.03% test accuracy on the held-out test set.
+- Supports classification of 10 municipal field-operation activities.
+- Efficient inference suitable for Streamlit deployment.
+- Robust performance across most activity classes.
 
 ## Limitations and Caveats
 
@@ -192,3 +202,7 @@ The serving system depends on:
 - `src/classifier.py`
 
 Both the command-line predictor and the future web application must call `src/classifier.py` rather than implementing separate preprocessing logic.
+
+## System Overview
+
+![System Architecture](assets/architecture.png)
